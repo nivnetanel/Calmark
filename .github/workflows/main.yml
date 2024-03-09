@@ -2,7 +2,7 @@ name: Run Script Every 5 Minute
 
 on:
   schedule:
-    - cron: "0 7 * * *" # Run every 5 minute
+    - cron: "0 23 * * *" # Run every 5 minute
 
 jobs:
   run-script:
