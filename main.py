@@ -80,7 +80,7 @@ next_month_string = next_month.strftime("%B %Y")
 input_strings = []
 for date in [current_date, next_month]:
     input_string = make_http_request(date)
-    time.sleep(5)
+    time.sleep(10)
     if input_string:
         result_dict = transform_date_string(input_string)
         input_strings.append(result_dict)
