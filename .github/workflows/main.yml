@@ -1,4 +1,4 @@
-name: Run Script Every 5 Minute
+name: Run Script Every Day
 
 on:
   schedule:
