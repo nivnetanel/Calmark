@@ -1,0 +1,32 @@
+name: Run Script Daily
+
+on:
+  schedule:
+    - cron: "0 7 * * *" # Schedule to run every day at 7 AM UTC
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Script
+        run: python main.py
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          REFERER: ${{ secrets.REFERER}}
+          BUSINESS_ID: ${{ secrets.BUSINESS_ID}}
+          SERVICE_ID: ${{ secrets.SERVICE_ID}}

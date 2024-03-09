@@ -4,6 +4,7 @@ import calendar
 import time
 import smtplib
 from email.mime.text import MIMEText
+import os
 
 from config import GMAIL_USER, GMAIL_PASSWORD, BASE_URL, BUSINESS_ID, SERVICE_ID, HEADERS, MARCH_DUMMY_RESPONSE, APRIL_DUMMY_RESPONSE
 from dotenv import load_dotenv
