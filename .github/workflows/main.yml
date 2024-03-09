@@ -1,8 +1,9 @@
-name: Run Script Daily
+name: Run Script Every 5 Minute
 
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "*/5 * * * *" # Run every 5 minute
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
