@@ -1,13 +1,12 @@
-# config.py
-
 import os
 
 GMAIL_USER = os.getenv('GMAIL_USER')
 GMAIL_PASSWORD = os.getenv('GMAIL_PASSWORD')
+BUSINESS_ID = os.getenv('BUSINESS_ID')
+SERVICE_ID =os.getenv('SERVICE_ID')
+REFERER=os.getenv('REFERER')
 
 BASE_URL = 'https://calmark.co.il/Pages/Page.aspx/GetTimeForAppointment'
-BUSINESS_ID = 2688
-SERVICE_ID = 29992
 
 HEADERS = {
     'authority': 'calmark.co.il',
@@ -16,7 +15,7 @@ HEADERS = {
     'content-type': 'application/json; charset=UTF-8',
     'key': 'undefined',
     'origin': 'https://calmark.co.il',
-    'referer': 'https://calmark.co.il/p/VBHxF',
+    'referer': REFERER,
     'sec-ch-ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
