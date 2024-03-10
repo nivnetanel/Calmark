@@ -2,7 +2,7 @@ name: Run Script Every Day
 
 on:
   schedule:
-    - cron: "0 7 * * *" 
+    - cron: "0 8 * * *" 
 
 jobs:
   run-script:
@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2.5.4
+        uses: actions/checkout@latest
 
       - name: Set up Python
-        uses: actions/setup-python@v2.5.3
+        uses: actions/setup-python@latest
         with:
           python-version: 3.8
 
