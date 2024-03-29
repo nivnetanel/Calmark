@@ -1,26 +1,102 @@
+from email.mime.multipart import MIMEMultipart
 import requests
 from datetime import datetime, timedelta
 import calendar
 import time
 import smtplib
 from email.mime.text import MIMEText
-import os
 
-from config import GMAIL_USER, GMAIL_PASSWORD, BASE_URL, BUSINESS_ID, SERVICE_ID, HEADERS, MARCH_DUMMY_RESPONSE, APRIL_DUMMY_RESPONSE
+from config import GMAIL_USER, GMAIL_PASSWORD, BASE_URL, BUSINESS_ID, SERVICE_ID, HEADERS, REFERER
 from dotenv import load_dotenv
 
 load_dotenv()
 
-
 def send_email(subject, body):
-    msg = MIMEText(body)
+    # Create a MIME multipart message
+    msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
     msg['From'] = GMAIL_USER
-    msg['To'] = GMAIL_USER 
+    msg['To'] = GMAIL_USER
 
+    # Create HTML version of the email body with enhanced styling
+    html_body = f"""
+    <html>
+        <head>
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    padding: 20px;
+                }}
+                h1, h2, ul {{
+                    margin-bottom: 10px;
+                }}
+                ul {{
+                    list-style-type: none;
+                    padding-left: 0;
+                }}
+                li {{
+                    padding: 5px 0;
+                }}
+                .current-month {{
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                }}
+                .next-month {{
+                    background-color: #f2f2f2;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="current-month">
+                <h1>Availability for Current Month:</h1>
+                <ul>
+    """
+
+    for date_key, data in input_strings[0].items():
+        weekday = data.get("weekday", "")
+        times = ", ".join(data.get("times", []))
+        html_body += f'<li>{date_key}: {weekday} - {times}</li>'
+
+    html_body += """
+                </ul>
+            </div>
+            <div class="next-month">
+                <h1>Availability for Next Month:</h1>
+                <ul>
+    """
+
+    for date_key, data in input_strings[1].items():
+        weekday = data.get("weekday", "")
+        times = ", ".join(data.get("times", []))
+        html_body += f'<li>{date_key}: {weekday} - {times}</li>'
+
+    html_body += f"""
+                </ul>
+            </div>
+            <br>
+            {REFERER}
+        </body>
+    </html>
+    """
+
+    # Create a MIMEText object for the HTML content
+    html_part = MIMEText(html_body, 'html')
+
+    # Attach HTML part to the email
+    msg.attach(html_part)
+
+    # Connect to SMTP server and send email
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
         server.login(GMAIL_USER, GMAIL_PASSWORD)
         server.sendmail(GMAIL_USER, GMAIL_USER, msg.as_string())
+
 
 
 def transform_date_string(input_string):

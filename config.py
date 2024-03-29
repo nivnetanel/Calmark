@@ -25,11 +25,3 @@ HEADERS = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
     'x-requested-with': 'XMLHttpRequest',
 }
-
-MARCH_DUMMY_RESPONSE = {
-    'd': 'your_march_dummy_response_here',
-}
-
-APRIL_DUMMY_RESPONSE = {
-    'd': 'your_april_dummy_response_here',
-}
