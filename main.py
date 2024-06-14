@@ -175,4 +175,4 @@ for date_key, data in input_strings[1].items():
     email_body += f'{date_key}: {weekday} - {times}\n\n'
 
 # Send the email
-send_email(f"Availability for {current_date.strftime('%B')} and {next_month_string}", email_body)
+send_email("Calmark", email_body)
