@@ -3,7 +3,6 @@ name: Run Script Every Day
 on:
   schedule:
     - cron: "0 3 * * *"
-
     # - cron: "*/7 * * * *"
 
 jobs:
